@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — The Prince of Wales, Falmouth</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- ╔══════════════════════════════════════════════════════╗
+       ║  FACEBOOK SETUP — ACCOUNT OWNER ACTION REQUIRED     ║
+       ║                                                      ║
+       ║  Step 1: Go to https://developers.facebook.com      ║
+       ║  Step 2: Log in with the pub's Facebook account     ║
+       ║  Step 3: Click "Create App" → type: "Consumer"      ║
+       ║  Step 4: Go to Settings > Basic, copy your App ID   ║
+       ║  Step 5: Replace YOUR_APP_ID_HERE on the line below ║
+       ║  Step 6: Add your website domain under "App Domains"║
+       ╚══════════════════════════════════════════════════════╝ -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v19.0&appId=YOUR_APP_ID_HERE">
+  </script>
+
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <div id="navbar"></div>
+
+
+  <!-- ══ PAGE HERO ══ -->
+  <section class="page-hero events-hero">
+    <div class="container">
+      <p class="section-kicker-menu">What's On</p>
+      <h1>Events &amp; Happenings</h1>
+      <p class="page-intro">
+        Live music, quiz nights, seasonal specials and more —
+        all posted straight to our Facebook page so you're always in the loop.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══ FACEBOOK FEED ══ -->
+  <section class="events-feed">
+    <div class="container">
+      <div class="events-feed-layout">
+
+        <!-- Live feed -->
+        <div class="feed-main">
+          <p class="section-kicker">Live from Facebook</p>
+          <h2 class="feed-title">Latest Posts &amp; Events</h2>
+          <p class="feed-subtitle">
+            Our Facebook page is where we announce everything first — gigs,
+            special menus, last-minute offers and more.
+          </p>
+
+          <!-- Facebook Page Plugin (auto-fills once App ID is set above) -->
+          <div class="fb-plugin-wrap">
+            <div class="fb-page"
+              data-href="https://www.facebook.com/p/The-Prince-of-Wales-Pub-Falmouth-61579140847276/"
+              data-tabs="timeline,events"
+              data-width="500"
+              data-height="800"
+              data-small-header="false"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="true">
+            </div>
+          </div>
+
+          <!-- Shown automatically if the plugin hasn't loaded after 4 seconds -->
+          <div class="fb-fallback" id="fb-fallback">
+            <div class="fb-fallback-icon">📣</div>
+            <h3>See What's On</h3>
+            <p>
+              Our Facebook page is the best place to keep up with events,
+              live music and last-minute announcements.
+            </p>
+            <a href="https://www.facebook.com/p/The-Prince-of-Wales-Pub-Falmouth-61579140847276/"
+               target="_blank" rel="noopener" class="btn-facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.258h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+              </svg>
+              Visit Our Facebook Page
+            </a>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="feed-sidebar">
+
+          <div class="sidebar-card">
+            <h3>🎵 Regular Events</h3>
+            <ul class="sidebar-list">
+              <li>
+                <span class="sidebar-dot"></span>
+                <div>
+                  <strong>Live Music</strong>
+                  <p>Local acts every weekend — check Facebook for who's on.</p>
+                </div>
+              </li>
+              <li>
+                <span class="sidebar-dot"></span>
+                <div>
+                  <strong>Quiz Night</strong>
+                  <p>Put your general knowledge to the test. Teams welcome.</p>
+                </div>
+              </li>
+              <li>
+                <span class="sidebar-dot"></span>
+                <div>
+                  <strong>Seasonal Specials</strong>
+                  <p>Holiday events, themed nights and pop-up menus.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-card sidebar-card--cta">
+            <div class="sidebar-cta-icon">🔔</div>
+            <h3>Never Miss an Event</h3>
+            <p>
+              Follow us on Facebook and turn on notifications — we post
+              all events there first.
+            </p>
+            <a href="https://www.facebook.com/p/The-Prince-of-Wales-Pub-Falmouth-61579140847276/"
+               target="_blank" rel="noopener" class="btn-facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.258h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+              </svg>
+              Follow on Facebook
+            </a>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>📍 Find Us</h3>
+            <p class="sidebar-address">
+              The Prince of Wales<br>
+              Falmouth, Cornwall<br>
+              <a href="location.html">Get directions →</a>
+            </p>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ FOOTER ══ -->
+  <div id="footer"></div>
+
+</body>
+</html>

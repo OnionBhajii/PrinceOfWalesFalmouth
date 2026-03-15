@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | Prince of Wales</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="page-hero gallery-hero">
+      <div class="container">
+        <p class="section-kicker-menu">Photo Gallery</p>
+        <h1>Inside the Prince</h1>
+        <p class="page-intro">
+          A proper Cornish local — polished taps, warm timber, and the kind of character
+          you can't manufacture. Take a look around.
+        </p>
+      </div>
+    </section>
+
+    <!-- GALLERY GRID -->
+    <section class="gallery-section">
+      <div class="container">
+
+        <div class="gallery-grid">
+
+          <!-- Row 1: wide + tall -->
+          <div class="gallery-item gallery-item--wide" data-index="0">
+            <img src="images/gallery-exterior.jpg" alt="Prince of Wales pub exterior, Falmouth" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>The Prince of Wales</span>
+            </div>
+          </div>
+
+          <div class="gallery-item gallery-item--tall" data-index="1">
+            <img src="images/gallery-bar-taps.jpg" alt="Bar taps at the Prince of Wales" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>On Tap</span>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="gallery-item" data-index="2">
+            <img src="images/gallery-bar-interior.jpg" alt="Bar interior" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>Behind the Bar</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-index="3">
+            <img src="images/gallery-taps-carling.jpg" alt="Draught taps — Carling, Cruzcampo, Thatchers Gold, Birra Moretti, Guinness" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>The Lineup</span>
+            </div>
+          </div>
+
+          <div class="gallery-item gallery-item--tall" data-index="4">
+            <img src="images/gallery-thatchers.jpg" alt="Thatchers cider taps" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>Thatchers on Draft</span>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="gallery-item gallery-item--wide" data-index="5">
+            <img src="images/gallery-spirits.jpg" alt="Spirits shelf behind the bar" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>The Spirits</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-index="6">
+            <img src="images/gallery-bar-taps2.jpg" alt="Bar taps close up" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>Ready to Pour</span>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-index="7">
+            <img src="images/gallery-sign.jpg" alt="Free Beer Tomorrow sign" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>Free Beer Tomorrow</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&#x2715;</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Next">&#8250;</button>
+    <div class="lightbox-inner">
+      <img id="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    // ── Gallery lightbox ──
+    const items    = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lightbox-img');
+    const lbCap    = document.getElementById('lightbox-caption');
+    const lbClose  = document.getElementById('lightbox-close');
+    const lbPrev   = document.getElementById('lightbox-prev');
+    const lbNext   = document.getElementById('lightbox-next');
+
+    let current = 0;
+
+    const images = Array.from(items).map(item => ({
+      src:     item.querySelector('img').src,
+      caption: item.querySelector('.gallery-overlay span').textContent
+    }));
+
+    function openLightbox(index) {
+      current = index;
+      lbImg.src         = images[current].src;
+      lbCap.textContent = images[current].caption;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showNext() {
+      current = (current + 1) % images.length;
+      lbImg.src         = images[current].src;
+      lbCap.textContent = images[current].caption;
+    }
+
+    function showPrev() {
+      current = (current - 1 + images.length) % images.length;
+      lbImg.src         = images[current].src;
+      lbCap.textContent = images[current].caption;
+    }
+
+    items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', showNext);
+    lbPrev.addEventListener('click', showPrev);
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowRight')  showNext();
+      if (e.key === 'ArrowLeft')   showPrev();
+    });
+  </script>
+
+  <div id="footer"></div>
+</body>
+</html>
