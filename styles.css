@@ -2169,3 +2169,30 @@ a { color: inherit; text-decoration: none; transition: color 0.25s ease; }
   .gig-act { text-align: left; }
   .gig-act small { margin-left: 0; display: block; }
 }
+.fb-cta-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 56px 40px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.fb-cta-card .fb-cta-icon { font-size: 2.8rem; margin-bottom: 18px; }
+
+.fb-cta-card h3 { font-size: 1.6rem; margin-bottom: 12px; }
+
+.fb-cta-card p {
+  color: var(--muted);
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 640px) {
+  .fb-cta-card { padding: 38px 22px; }
+}
