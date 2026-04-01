@@ -1853,6 +1853,7 @@ a { color: inherit; text-decoration: none; transition: color 0.25s ease; }
   .stay-cta-box { padding: 38px 22px; }
   .stay-cta-buttons { flex-direction: column; align-items: center; }
 }
+
 /* ══════════════════════════════════════
    EVENTS PAGE
 ══════════════════════════════════════ */
@@ -2169,6 +2170,7 @@ a { color: inherit; text-decoration: none; transition: color 0.25s ease; }
   .gig-act { text-align: left; }
   .gig-act small { margin-left: 0; display: block; }
 }
+
 .fb-cta-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -2195,4 +2197,25 @@ a { color: inherit; text-decoration: none; transition: color 0.25s ease; }
 
 @media (max-width: 640px) {
   .fb-cta-card { padding: 38px 22px; }
+}
+
+/* ══════════════════════════════════════
+   COMING SOON BUTTON STATE
+══════════════════════════════════════ */
+.room-btn--soon,
+.btn--soon {
+  background: var(--muted-dark);
+  color: rgba(253,240,224,0.45);
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+
+.room-btn--soon:hover,
+.btn--soon:hover {
+  background: var(--muted-dark);
+  transform: none;
+  box-shadow: none;
 }
