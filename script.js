@@ -1,4 +1,6 @@
-// ── Navbar ──
+// ══════════════════════════════════════
+//  NAVBAR
+// ══════════════════════════════════════
 fetch("navbar.html")
   .then(res => res.text())
   .then(data => {
@@ -13,7 +15,6 @@ fetch("navbar.html")
         const isOpen = navLinks.classList.toggle("nav-open");
         menuToggle.setAttribute("aria-expanded", isOpen);
 
-        // Animate hamburger lines into X
         const spans = menuToggle.querySelectorAll("span");
         if (isOpen) {
           spans[0].style.transform = "translateY(7px) rotate(45deg)";
@@ -49,7 +50,9 @@ fetch("navbar.html")
     });
   });
 
-// ── Navbar scroll effect ──
+// ══════════════════════════════════════
+//  NAVBAR SCROLL EFFECT
+// ══════════════════════════════════════
 window.addEventListener("scroll", () => {
   const nav = document.querySelector(".site-header");
   if (nav) {
@@ -57,7 +60,9 @@ window.addEventListener("scroll", () => {
   }
 }, { passive: true });
 
-// ── Footer ──
+// ══════════════════════════════════════
+//  FOOTER
+// ══════════════════════════════════════
 fetch("footer.html")
   .then(res => res.text())
   .then(data => {
@@ -65,77 +70,64 @@ fetch("footer.html")
     if (el) el.innerHTML = data;
   });
 
-// ── Events page: Facebook Page Plugin fallback ──
-setTimeout(function () {
-  const plugin   = document.querySelector(".fb-page");
-  const wrap     = document.querySelector(".fb-plugin-wrap");
-  const fallback = document.getElementById("fb-fallback");
+// ══════════════════════════════════════
+//  GIG GUIDE TABS & AUTO-CLEANUP
+// ══════════════════════════════════════
+const gigTabs = document.querySelectorAll(".gig-tab");
 
-  if (!plugin || plugin.offsetHeight < 50) {
-    if (wrap)     wrap.style.display     = "none";
-    if (fallback) fallback.style.display = "block";
-  }
-}, 4000);
-
-// ── Events page: Gig Guide Tabs & Auto-Cleanup ──
-const gigTabs = document.querySelectorAll('.gig-tab');
 if (gigTabs.length > 0) {
-  
-  // 1. Setup the basic tab clicking logic
+
+  // Tab click logic
   gigTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.gig-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.gig-list').forEach(l => l.classList.remove('active'));
-      
-      tab.classList.add('active');
-      document.getElementById(`gig-${tab.dataset.month}`).classList.add('active');
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".gig-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".gig-list").forEach(l => l.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById(`gig-${tab.dataset.month}`).classList.add("active");
     });
   });
 
-  // 2. Auto-hide past events
+  // Hide past events
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time to midnight for fair comparison
+  today.setHours(0, 0, 0, 0);
 
-  document.querySelectorAll('.gig-list li').forEach(li => {
-    const dateString = li.getAttribute('data-date');
-    if (dateString) {
-      const eventDate = new Date(dateString);
-      if (eventDate < today) {
-        li.style.display = 'none'; // Hide if the day has passed
-      }
+  document.querySelectorAll(".gig-list li").forEach(li => {
+    const dateStr = li.getAttribute("data-date");
+    if (dateStr && new Date(dateStr) < today) {
+      li.style.display = "none";
     }
   });
 
-  // 3. Hide empty tabs and auto-switch if needed
-  let firstVisibleTab = null;
+  // Hide tabs with no remaining events, auto-switch if needed
+  let firstVisibleTab       = null;
   let activeTabStaysVisible = false;
 
   gigTabs.forEach(tab => {
     const list = document.getElementById(`gig-${tab.dataset.month}`);
     if (list) {
-      // Find how many events in this list are still visible
-      const visibleEvents = Array.from(list.querySelectorAll('li')).filter(li => li.style.display !== 'none');
-      
-      if (visibleEvents.length === 0) {
-        tab.style.display = 'none'; // Hide the tab completely
+      const visible = Array.from(list.querySelectorAll("li")).filter(li => li.style.display !== "none");
+      if (visible.length === 0) {
+        tab.style.display = "none";
       } else {
-        if (!firstVisibleTab) firstVisibleTab = tab; // Remember the first tab with events
-        if (tab.classList.contains('active')) activeTabStaysVisible = true;
+        if (!firstVisibleTab) firstVisibleTab = tab;
+        if (tab.classList.contains("active")) activeTabStaysVisible = true;
       }
     }
   });
 
-  // 4. If the month we are currently looking at is empty, click the next available tab
   if (!activeTabStaysVisible && firstVisibleTab) {
     firstVisibleTab.click();
   }
 }
-// ── Room gallery logic ──
+
+// ══════════════════════════════════════
+//  ROOM GALLERY CAROUSELS
+// ══════════════════════════════════════
 document.querySelectorAll(".room-gallery").forEach(gallery => {
-  const track = gallery.querySelector(".room-gallery-track");
-  const imgs  = track.querySelectorAll("img");
-  const dots  = gallery.querySelectorAll(".gallery-dot");
-  let current = 0;
+  const track   = gallery.querySelector(".room-gallery-track");
+  const imgs    = track.querySelectorAll("img");
+  const dots    = gallery.querySelectorAll(".gallery-dot");
+  let   current = 0;
 
   function goTo(index) {
     current = ((index % imgs.length) + imgs.length) % imgs.length;
@@ -150,7 +142,7 @@ document.querySelectorAll(".room-gallery").forEach(gallery => {
   // Swipe support
   let startX = null;
   track.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener("touchend",   e => {
+  track.addEventListener("touchend", e => {
     if (startX === null) return;
     const diff = startX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
