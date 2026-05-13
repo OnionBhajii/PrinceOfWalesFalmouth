@@ -1847,6 +1847,7 @@ a { color: inherit; text-decoration: none; transition: color 0.25s ease; }
   border: 1px solid var(--border);
   transition: var(--transition);
   letter-spacing: 0.04em;
+  text-align: center;
 }
 
 .stay-btn-secondary:hover {
